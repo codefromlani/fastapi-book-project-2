@@ -42,6 +42,16 @@ async def create_book(book: Book):
     )
 
 
+@router.get("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
+async def get_book_by_id(book_id: int) -> Book:
+    book = db.get_book(book_id)
+    if book is None:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND, content={"message": "Book not found"}
+        )
+    return book
+
+
 @router.get(
     "/", response_model=OrderedDict[int, Book], status_code=status.HTTP_200_OK
 )
