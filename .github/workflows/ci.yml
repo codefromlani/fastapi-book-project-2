@@ -34,4 +34,5 @@ jobs:
 
       - name: Fail on Test Errors
         if: failure()
-        exit 1
+        run: exit 1
+
